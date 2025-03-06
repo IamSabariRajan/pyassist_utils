@@ -3,9 +3,6 @@ start_time = datetime.now()
 from time import sleep
 from pyloggerutils import Logger
 
-# def get_logger(**kwargs):
-#     return Logger(**kwargs)
-
 class Utilities():
 
     MODULE = __name__
@@ -14,7 +11,11 @@ class Utilities():
         if "name" not in kwargs:
             kwargs["name"] = (f"{__class__}".split("'")[1])
         self.get_logger(**kwargs)
-        self.debug(f"Initialized: {kwargs['name']}")
+        self.info(f"Initialized: {kwargs['name']}")
+
+    def extract_logger_functions(self):
+        logger = self.logger
+        return logger.debug, logger.info, logger.warning, logger.error, logger.critical 
 
     def get_logger(self, **kwargs):
         logger = Logger(**kwargs)
